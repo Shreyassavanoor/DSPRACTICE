@@ -9,6 +9,10 @@ class BinarySearchTree:
         self.root = None
 
     def insert(self, value):
+        if not value:
+            print('Value cannot be empty')
+            return
+        print('Inserting value {0}'.format(value))
         if self.root is None:
             self.root = Node(value)
         else:
@@ -18,14 +22,11 @@ class BinarySearchTree:
                 if value < currentNode.value:
                     prevNode = currentNode
                     currentNode = currentNode.left
-                elif value > currentNode.value:
+                else:
                     prevNode = currentNode
                     currentNode = currentNode.right
-                else:
-                    print('Value is already present in tree')
-                    return
             node = Node(value)
-            if value > prevNode.value:
+            if value >= prevNode.value:
                 prevNode.right = node
             else:
                 prevNode.left = node
@@ -33,7 +34,16 @@ class BinarySearchTree:
 
     def search(self, value):
         print('Searching for {0}'.format(value))
-
+        currentNode = self.root
+        while(currentNode):
+            if value == currentNode.value:
+                print('Value found')
+                return
+            elif value < currentNode.value:
+                currentNode = currentNode.left
+            else: 
+                currentNode = currentNode.right
+             
 
 
 def main():
@@ -45,6 +55,7 @@ def main():
     tree.insert(6)
     tree.insert(15)
     tree.insert(170)
+    tree.search(20)
 
 
 if __name__ == '__main__':
